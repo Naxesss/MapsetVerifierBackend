@@ -449,7 +449,7 @@ namespace MapsetVerifierBackend.renderer
                             Div("overview-float",
                                 String.Join("<br>",
                                     hsUsedCount.Select(aPair =>
-                                        Try (() =>
+                                        Try(() =>
                                             {
                                                 string fullPath = Path.Combine(aBeatmapSet.songPath, aPair.Key);
 
@@ -463,7 +463,7 @@ namespace MapsetVerifierBackend.renderer
                             Div("overview-float",
                                 String.Join("<br>",
                                     hsUsedCount.Select(aPair =>
-                                        Try (() =>
+                                        Try(() =>
                                             {
                                                 string fullPath = Path.Combine(aBeatmapSet.songPath, aPair.Key);
                                                 double duration = AudioBASS.GetDuration(fullPath);
@@ -481,7 +481,7 @@ namespace MapsetVerifierBackend.renderer
                             Div("overview-float",
                                 String.Join("<br>",
                                     hsUsedCount.Select(aPair =>
-                                        Try (() =>
+                                        Try(() =>
                                             {
                                                 string fullPath = Path.Combine(aBeatmapSet.songPath, aPair.Key);
 
@@ -769,7 +769,7 @@ namespace MapsetVerifierBackend.renderer
                 }
             }
 
-            if(beatmapContent.Any(aPair => aPair.Value != beatmapContent.First().Value))
+            if (beatmapContent.Any(aPair => aPair.Value != beatmapContent.First().Value))
                 return
                     RenderField(aTitle,
                         String.Concat(
