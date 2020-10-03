@@ -248,6 +248,7 @@ namespace MapsetVerifierBackend.renderer
                                     " style=\"margin-left:" + ((circle.time - prevTime) / ZOOM_FACTOR) + "px;\"",
                                     DivAttr("overview-timeline-circle",
                                         DataAttr("timestamp", Timestamp.Get(circle.time)) +
+                                        DataAttr("tooltip", Timestamp.Get(circle.time)) +
                                         " style=\"" +
                                             RenderHitObjectBackgroundStyle(circle, aBeatmap) +
                                             RenderHitObjectSizeStyle(circle, aBeatmap) +
@@ -267,6 +268,7 @@ namespace MapsetVerifierBackend.renderer
                             return
                                 DivAttr("overview-timeline-object",
                                     DataAttr("timestamp", Timestamp.Get(slider.time)) +
+                                    DataAttr("tooltip", Timestamp.Get(slider.time)) +
                                     " style=\"margin-left:" + ((slider.time - prevTime) / ZOOM_FACTOR) + "px;\"",
                                     String.Concat(
                                     slider.GetEdgeTimes().Select((anEdgeTime, anIndex) =>
@@ -297,6 +299,7 @@ namespace MapsetVerifierBackend.renderer
                             return
                                 DivAttr("overview-timeline-object",
                                     DataAttr("timestamp", Timestamp.Get(spinner.time)) +
+                                    DataAttr("tooltip", Timestamp.Get(spinner.time)) +
                                     " style=\"margin-left:" + ((spinner.time - prevTime) / ZOOM_FACTOR) + "px;\"",
                                     Div("overview-timeline-object edge",
                                         Div("overview-timeline-edge",
