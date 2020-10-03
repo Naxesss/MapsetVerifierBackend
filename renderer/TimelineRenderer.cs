@@ -23,34 +23,40 @@ namespace MapsetVerifierBackend.renderer
         {
             return
                 RenderContainer("Timeline Comparison (Prototype)",
+                    RenderField("Navigation",
+                        RenderField("Move timeline",
+                            "Click & drag"
+                        ),
+                        RenderField("Move timeline faster",
+                            "Click & drag + Shift"
+                        ),
+                        RenderField("Move timeline slower",
+                            "Click & drag + Ctrl"
+                        )
+                    ),
+                    RenderField("Timestamps",
+                        RenderField("See timestamp",
+                            "Hover"
+                        ),
+                        RenderField("Goto timestamp",
+                            "Alt + Left Click"
+                        ),
+                        RenderField("Copy timestamp",
+                            "Alt + Right Click"
+                        )
+                    ),
+                    RenderField("Hit sounds",
+                        RenderField("Red lines",
+                            "Clap"
+                        ),
+                        RenderField("Green lines",
+                            "Finish"
+                        ),
+                        RenderField("Blue lines",
+                            "Whistle"
+                        )
+                    ),
                     Div("overview-timeline-top",
-                        // Control hints.
-                        Div("overview-timeline-hints",
-                            Div("overview-timeline-hint",
-                                "Move timeline: Click & drag"
-                            ),
-                            Div("overview-timeline-hint",
-                                "Speed: Shift / Ctrl"
-                            ),
-                            Div("overview-timeline-hint",
-                                "Timestamp: Alt + Click"
-                            )
-                        ),
-                        // Hit sound coloring hints.
-                        Div("overview-timeline-hints",
-                            Div("overview-timeline-hint overview-timeline-hs",
-                                "Colored lines: "
-                            ),
-                            Div("overview-timeline-hint overview-timeline-hs",
-                                "Red - Clap"
-                            ),
-                            Div("overview-timeline-hint overview-timeline-hs",
-                                "Blue - Whistle"
-                            ),
-                            Div("overview-timeline-hint overview-timeline-hs",
-                                "Green - Finish"
-                            )
-                        ),
                         RenderTop(aBeatmapSet)
                     ),
                     Div("overview-timeline-content",
