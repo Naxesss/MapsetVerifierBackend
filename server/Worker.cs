@@ -1,7 +1,7 @@
 ﻿using MapsetParser.objects;
 using MapsetParser.statics;
 using MapsetSnapshotter;
-using MapsetVerifierBackend.renderer;
+using MapsetVerifierBackend.Rendering;
 using MapsetVerifierFramework;
 using MapsetVerifierFramework.objects;
 using Microsoft.AspNetCore.SignalR;
@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MapsetVerifierBackend.server
+namespace MapsetVerifierBackend.Server
 {
     public class Worker : BackgroundService
     {

@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MapsetVerifierBackend.renderer
+namespace MapsetVerifierBackend.Rendering
 {
     public class Renderer
     {
@@ -37,7 +37,7 @@ namespace MapsetVerifierBackend.renderer
             return Link("https://osu.ppy.sh/users/" + aUsername, aUsername);
         }
 
-        /// <summary> Creates a link to the given username with the same username as content. </summary>
+        /// <summary> Creates a link to the given timestamp. </summary>
         protected static string TimestampLink(object aTimestamp)
         {
             return Link("osu://edit/" + aTimestamp + "\" class=\"card-instance-timestamp", aTimestamp);

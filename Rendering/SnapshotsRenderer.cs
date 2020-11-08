@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MapsetVerifierBackend.renderer
+namespace MapsetVerifierBackend.Rendering
 {
     public class SnapshotsRenderer : BeatmapInfoRenderer
     {

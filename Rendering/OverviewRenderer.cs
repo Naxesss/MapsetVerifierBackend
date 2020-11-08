@@ -12,7 +12,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace MapsetVerifierBackend.renderer
+namespace MapsetVerifierBackend.Rendering
 {
     class OverviewRenderer : BeatmapInfoRenderer
     {

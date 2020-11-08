@@ -3,7 +3,7 @@ using MapsetParser.statics;
 using MapsetSnapshotter;
 using MapsetVerifierFramework;
 using MapsetVerifierFramework.objects;
-using MapsetVerifierBackend.renderer;
+using MapsetVerifierBackend.Rendering;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace MapsetVerifierBackend.server
+namespace MapsetVerifierBackend.Server
 {
     public class SignalHub : Hub
     {

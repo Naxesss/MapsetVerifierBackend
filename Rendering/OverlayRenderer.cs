@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MapsetVerifierBackend.renderer
+namespace MapsetVerifierBackend.Rendering
 {
     public class OverlayRenderer : Renderer
     {

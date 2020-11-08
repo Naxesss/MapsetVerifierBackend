@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace MapsetVerifierBackend.server
+namespace MapsetVerifierBackend.Server
 {
     public class Host
     {
