@@ -167,6 +167,29 @@ namespace MapsetVerifierBackend.Rendering
                     (evaluator) => Div("code", evaluator.Value.Replace("`", "")));
         }
 
+        protected static string FormatExceptions(string aContent)
+        {
+            Regex regex = new Regex(@"<exception><message>([^<>]+)<\/message><stacktrace>([^<>]+)<\/stacktrace><\/exception>");
+            Match match = regex.Match(aContent);
+
+            string message = match.Groups[0].Value;
+            string stackTrace = match.Groups[1].Value;
+
+            return $@"
+                <div
+                    class=""exception-shortcut detail-shortcut shows-info""
+                    data-tooltip=""Show exception info""
+                    data-shown-info=""
+                        <div class=&quot;exception-message&quot;>
+                            &quot;{Encode(message)}&quot;
+                        </div>
+                        <div class=&quot;paste-separator&quot;></div>
+                        <div class=&quot;exception-trace&quot;>
+                            {Encode(stackTrace)}
+                        </div>"">
+                </div>";
+        }
+
         /// <summary> Replaces all pseudo image tags into proper html tags and moves them if needed. </summary>
         protected static string FormatImages(string aContent)
         {
@@ -227,6 +250,7 @@ namespace MapsetVerifierBackend.Rendering
             result = FormatTimestamps(result);
             result = FormatNotes(result);
             result = FormatImages(result);
+            result = FormatExceptions(result);
 
             return result;
         }
