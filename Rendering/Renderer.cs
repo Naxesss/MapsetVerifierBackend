@@ -12,6 +12,9 @@ namespace MapsetVerifierBackend.Rendering
 {
     public class Renderer
     {
+        /*
+         *  Tag Methods
+        */
 
         /// <summary> Surrounds the content with a div tag using the given class(es). </summary>
         protected static string Div(string aClass, params object[] aContents) => DivAttr(aClass, "", aContents);
@@ -34,6 +37,9 @@ namespace MapsetVerifierBackend.Rendering
         protected static string ScriptAttr(string anAttr, params object[] aContents) =>
             string.Concat("<script", anAttr, ">", string.Join("", aContents), "</script>");
 
+        /*
+         *  Tag Method Implementations
+        */
 
         /// <summary> Surrounds the content in a tooltip data attribute. </summary>
         protected static string Tooltip(object aContent) => DataAttr("tooltip", aContent);
@@ -45,6 +51,10 @@ namespace MapsetVerifierBackend.Rendering
         /// <summary> Creates a link to the given username with the same username as content. </summary>
         protected static string UserLink(object aUsername) =>
             Link("https://osu.ppy.sh/users/" + aUsername, aUsername);
+
+        /*
+         *  Complex DataAttr Implementations
+        */
 
         /// <summary> Combines all difficulties this issue applies to into a condition attribute
         /// (data-condition="difficulty=1,2,3"), which is then returned. </summary>
@@ -90,6 +100,10 @@ namespace MapsetVerifierBackend.Rendering
                 }));
         }
 
+        /*
+         *  Utility
+        */
+
         /// <summary> Returns the same string but HTML encoded, meaning greater and less than signs no longer form actual tags. </summary>
         public static string Encode(string aString)
         {
@@ -119,6 +133,10 @@ namespace MapsetVerifierBackend.Rendering
                 aLevel == Issue.Level.Check   ? "check" :
                                                 "info";
         }
+
+        /*
+         *  Formatting
+        */
 
         /// <summary> Wraps all timestamps outside of html tags into proper timestamp hyperlinks. </summary>
         protected static string FormatTimestamps(string aContent)
