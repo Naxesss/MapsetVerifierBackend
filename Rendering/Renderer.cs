@@ -12,60 +12,39 @@ namespace MapsetVerifierBackend.Rendering
 {
     public class Renderer
     {
-        /// <summary> Surrounds the content with a div tag using the given class(es), as well as any other attributes in the tag, like id or data. </summary>
-        protected static string DivAttr(string aClass, string anAttr, params object[] aContents)
-        {
-            return string.Concat("<div", (aClass.Length > 0 ? " class=\"" + aClass + "\"" : ""), anAttr, ">", string.Join("", aContents), "</div>");
-        }
 
         /// <summary> Surrounds the content with a div tag using the given class(es). </summary>
-        protected static string Div(string aClass, params object[] aContents)
-        {
-            return DivAttr(aClass, "", aContents);
-        }
+        protected static string Div(string aClass, params object[] aContents) => DivAttr(aClass, "", aContents);
+        /// <summary> Surrounds the content with a div tag using the given class(es), as well as any other attributes in the tag, like id or data. </summary>
+        protected static string DivAttr(string aClass, string anAttr, params object[] aContents) =>
+            string.Concat("<div", (aClass.Length > 0 ? " class=\"" + aClass + "\"" : ""), anAttr, ">", string.Join("", aContents), "</div>");
 
         /// <summary> Surrounds the content (or reference if none exists) with an a tag using the given reference.
         /// Does not need to target _blank, as this is done client-side. </summary>
-        protected static string Link(string aRef, object aContent = null)
-        {
-            return "<a href=\"" + aRef + "\">" + (aContent ?? aRef) + "</a>";
-        }
-
-        /// <summary> Creates a link to the given username with the same username as content. </summary>
-        protected static string UserLink(object aUsername)
-        {
-            return Link("https://osu.ppy.sh/users/" + aUsername, aUsername);
-        }
-
-        /// <summary> Creates a link to the given timestamp. </summary>
-        protected static string TimestampLink(object aTimestamp)
-        {
-            return Link("osu://edit/" + aTimestamp + "\" class=\"card-instance-timestamp", aTimestamp);
-        }
+        protected static string Link(string aRef, object aContent = null) =>
+            "<a href=\"" + aRef + "\">" + (aContent ?? aRef) + "</a>";
 
         /// <summary> Surrounds the content in a data attribute of a given type. </summary>
-        protected static string DataAttr(string aType, object aContent)
-        {
-            return " data-" + aType + "=\"" + Encode(aContent.ToString()) + "\"";
-        }
-
-        /// <summary> Surrounds the content in a tooltip data attribute. </summary>
-        protected static string Tooltip(object aContent)
-        {
-            return DataAttr("tooltip", aContent);
-        }
-
-        /// <summary> Surrounds the content with a script tag, as well as any other attributes in the tag. </summary>
-        protected static string ScriptAttr(string anAttr, params object[] aContents)
-        {
-            return string.Concat("<script", anAttr, ">", string.Join("", aContents), "</script>");
-        }
+        protected static string DataAttr(string aType, object aContent) =>
+            " data-" + aType + "=\"" + Encode(aContent.ToString()) + "\"";
 
         /// <summary> Surrounds the content with a script tag. </summary>
-        protected static string Script(params object[] aContents)
-        {
-            return ScriptAttr("", aContents);
-        }
+        protected static string Script(params object[] aContents) => ScriptAttr("", aContents);
+        /// <summary> Surrounds the content with a script tag, as well as any other attributes in the tag. </summary>
+        protected static string ScriptAttr(string anAttr, params object[] aContents) =>
+            string.Concat("<script", anAttr, ">", string.Join("", aContents), "</script>");
+
+
+        /// <summary> Surrounds the content in a tooltip data attribute. </summary>
+        protected static string Tooltip(object aContent) => DataAttr("tooltip", aContent);
+
+        /// <summary> Creates a link to the given timestamp. </summary>
+        protected static string TimestampLink(object aTimestamp) =>
+            Link("osu://edit/" + aTimestamp + "\" class=\"card-instance-timestamp", aTimestamp);
+
+        /// <summary> Creates a link to the given username with the same username as content. </summary>
+        protected static string UserLink(object aUsername) =>
+            Link("https://osu.ppy.sh/users/" + aUsername, aUsername);
 
         /// <summary> Combines all difficulties this issue applies to into a condition attribute
         /// (data-condition="difficulty=1,2,3"), which is then returned. </summary>
