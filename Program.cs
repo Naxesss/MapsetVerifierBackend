@@ -1,6 +1,6 @@
 ﻿using MapsetVerifierFramework;
 using MapsetVerifierFramework.objects;
-using MapsetVerifierBackend.server;
+using MapsetVerifierBackend.Server;
 using System;
 using System.Collections.Generic;
 using MapsetSnapshotter;
