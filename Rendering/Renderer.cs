@@ -55,6 +55,18 @@ namespace MapsetVerifierBackend.Rendering
             return DataAttr("tooltip", aContent);
         }
 
+        /// <summary> Surrounds the content with a script tag, as well as any other attributes in the tag. </summary>
+        protected static string ScriptAttr(string anAttr, params object[] aContents)
+        {
+            return string.Concat("<script", anAttr, ">", string.Join("", aContents), "</script>");
+        }
+
+        /// <summary> Surrounds the content with a script tag. </summary>
+        protected static string Script(params object[] aContents)
+        {
+            return ScriptAttr("", aContents);
+        }
+
         /// <summary> Combines all difficulties this issue applies to into a condition attribute
         /// (data-condition="difficulty=1,2,3"), which is then returned. </summary>
         protected static string DifficultiesDataAttr(Issue anIssue)
