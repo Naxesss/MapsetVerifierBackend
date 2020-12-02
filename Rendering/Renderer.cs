@@ -169,25 +169,22 @@ namespace MapsetVerifierBackend.Rendering
 
         protected static string FormatExceptions(string aContent)
         {
-            Regex regex = new Regex(@"<exception><message>([^<>]+)<\/message><stacktrace>([^<>]+)<\/stacktrace><\/exception>");
-            Match match = regex.Match(aContent);
-
-            string message = match.Groups[0].Value;
-            string stackTrace = match.Groups[1].Value;
-
-            return $@"
+            return Regex.Replace(
+                aContent,
+                @"<exception><message>([^<>]+)<\/message><stacktrace>([^<>]+)<\/stacktrace><\/exception>",
+                (evaluator) => $@"
                 <div
                     class=""exception-shortcut detail-shortcut shows-info""
                     data-tooltip=""Show exception info""
                     data-shown-info=""
                         <div class=&quot;exception-message&quot;>
-                            &quot;{Encode(message)}&quot;
+                            &quot;{Encode(evaluator.Groups[0].Value)}&quot;
                         </div>
                         <div class=&quot;paste-separator&quot;></div>
                         <div class=&quot;exception-trace&quot;>
-                            {Encode(stackTrace)}
+                            {Encode(evaluator.Groups[1].Value)}
                         </div>"">
-                </div>";
+                </div>");
         }
 
         /// <summary> Replaces all pseudo image tags into proper html tags and moves them if needed. </summary>
