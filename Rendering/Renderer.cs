@@ -15,7 +15,7 @@ namespace MapsetVerifierBackend.Rendering
         /// <summary> Surrounds the content with a div tag using the given class(es), as well as any other attributes in the tag, like id or data. </summary>
         protected static string DivAttr(string aClass, string anAttr, params object[] aContents)
         {
-            return String.Concat("<div", (aClass.Length > 0 ? " class=\"" + aClass + "\"" : ""), anAttr, ">", String.Join("", aContents), "</div>");
+            return string.Concat("<div", (aClass.Length > 0 ? " class=\"" + aClass + "\"" : ""), anAttr, ">", string.Join("", aContents), "</div>");
         }
 
         /// <summary> Surrounds the content with a div tag using the given class(es). </summary>
