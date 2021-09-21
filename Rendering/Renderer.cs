@@ -176,11 +176,11 @@ namespace MapsetVerifierBackend.Rendering
                     (evaluator) => Div("code", evaluator.Value.Replace("`", "")));
         }
 
-        protected static string FormatExceptions(string aContent)
+        protected static string FormatExceptionsInEncoded(string aContent)
         {
             return Regex.Replace(
                 aContent,
-                @"<exception><message>([^<>]+)<\/message><stacktrace>([^<>]+)<\/stacktrace><\/exception>",
+                @"&lt;exception&gt;\s*&lt;message&gt;\s*([\S\s]*?)\s*&lt;\/message&gt;\s*&lt;stacktrace&gt;\s*([\S\s]*?)\s*&lt;\/stacktrace&gt;\s*\&lt;\/exception&gt;",
                 (evaluator) => $@"
                 <div
                     class=""exception-shortcut detail-shortcut shows-info""
@@ -256,7 +256,7 @@ namespace MapsetVerifierBackend.Rendering
             result = FormatTimestamps(result);
             result = FormatNotes(result);
             result = FormatImages(result);
-            result = FormatExceptions(result);
+            result = FormatExceptionsInEncoded(result);
 
             return result;
         }
