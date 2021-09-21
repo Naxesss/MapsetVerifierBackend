@@ -14,7 +14,7 @@ using System.Text;
 
 namespace MapsetVerifierBackend.Rendering
 {
-    class OverviewRenderer : BeatmapInfoRenderer
+    public class OverviewRenderer : BeatmapInfoRenderer
     {
         public static string Render(BeatmapSet aBeatmapSet)
         {
