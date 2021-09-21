@@ -187,11 +187,11 @@ namespace MapsetVerifierBackend.Rendering
                     data-tooltip=""Show exception info""
                     data-shown-info=""
                         <div class=&quot;exception-message&quot;>
-                            &quot;{Encode(evaluator.Groups[0].Value)}&quot;
+                            &quot;{Encode(evaluator.Groups[1].Value)}&quot;
                         </div>
                         <div class=&quot;paste-separator&quot;></div>
                         <div class=&quot;exception-trace&quot;>
-                            {Encode(evaluator.Groups[1].Value)}
+                            {Encode(evaluator.Groups[2].Value)}
                         </div>"">
                 </div>");
         }
