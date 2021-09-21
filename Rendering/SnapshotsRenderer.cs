@@ -184,7 +184,7 @@ namespace MapsetVerifierBackend.Rendering
                 String.Concat(
                 aSectionDiffs.Select(aDiff =>
                 {
-                    string message = FormatTimestamps(aDiff.difference);
+                    string message = FormatTimestamps(Encode(aDiff.difference));
                     string condition = GetDiffCondition(aDiff, aSnapshots);
 
                     return
@@ -213,7 +213,7 @@ namespace MapsetVerifierBackend.Rendering
                 Div("card-detail-instances",
                     aDetails.Select(aDetail =>
                     {
-                        string timestampedMessage = FormatTimestamps(aDetail);
+                        string timestampedMessage = FormatTimestamps(Encode(aDetail));
                         if (timestampedMessage.Length == 0)
                             return "";
 

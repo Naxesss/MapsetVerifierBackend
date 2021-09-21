@@ -169,14 +169,14 @@ namespace MapsetVerifierBackend.Rendering
                                 (issues.Any() ?
                                 Div("",
                                     Div("card-detail-text",
-                                        message
+                                        Encode(message)
                                     ),
                                     DivAttr("vertical-arrow card-detail-toggle detail-shortcut",
                                         Tooltip("Toggle details")
                                     )
                                 ) :
                                 Div("card-detail-text",
-                                    message
+                                    Encode(message)
                                 )),
                                 DivAttr("doc-shortcut detail-shortcut",
                                     Tooltip("Show documentation")
@@ -196,7 +196,7 @@ namespace MapsetVerifierBackend.Rendering
                     aCheckIssues.Select(anIssue =>
                     {
                         string icon = GetIcon(anIssue.level);
-                        string timestampedMessage = FormatTimestamps(anIssue.message);
+                        string timestampedMessage = Format(Encode(anIssue.message));
                         if (timestampedMessage.Length == 0)
                             return "";
 
