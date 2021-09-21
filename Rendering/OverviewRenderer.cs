@@ -22,6 +22,7 @@ namespace MapsetVerifierBackend.Rendering
                     RenderBeatmapInfo(aBeatmapSet),
                     Div("paste-separator"),
                     RenderTimelineComparison(aBeatmapSet),
+                    RenderSkillCharts(aBeatmapSet),
                     RenderSnappings(aBeatmapSet),
                     RenderMetadata(aBeatmapSet),
                     RenderGeneralSettings(aBeatmapSet),
@@ -35,6 +36,9 @@ namespace MapsetVerifierBackend.Rendering
 
         private static string RenderTimelineComparison(BeatmapSet aBeatmapSet) =>
             TimelineRenderer.Render(aBeatmapSet);
+
+        private static string RenderSkillCharts(BeatmapSet aBeatmapSet) =>
+            SkillChartRenderer.Render(aBeatmapSet);
 
         private static string RenderSnappings(BeatmapSet aBeatmapSet)
         {
