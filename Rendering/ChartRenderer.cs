@@ -1,5 +1,4 @@
 ﻿using MapsetVerifierBackend.Rendering.Objects;
-using MapsetVerifierFramework.objects.components;
 using System;
 using System.Collections.Generic;
 using System.Text;

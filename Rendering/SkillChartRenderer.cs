@@ -1,6 +1,5 @@
 ﻿using MapsetParser.objects;
 using MapsetParser.starrating.skills;
-using MapsetVerifierFramework.objects.components;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
 using System.Text;
+using MapsetVerifierBackend.Rendering.Objects;
 using TagLib.Id3v2;
 
 namespace MapsetVerifierBackend.Rendering
