@@ -72,6 +72,9 @@ namespace MapsetVerifierBackend.Rendering
 
                 foreach (Skill skill in beatmap.difficultyAttributes.Skills)
                 {
+                    if (!(skill is StrainSkill strainSkill))
+                        continue;
+                    
                     if (!skillCharts.ContainsKey(skill))
                     {
                         skillCharts[skill] = new LineChart(
@@ -81,9 +84,8 @@ namespace MapsetVerifierBackend.Rendering
                         );
                     }
 
-                    skillCharts[skill].Data.Add(
-                        GetSkillSeries(beatmap, skill, skillCharts[skill])
-                    );
+                    var skillSeries = GetSkillSeries(beatmap, strainSkill, skillCharts[skill]);
+                    skillCharts[skill].Data.Add(skillSeries);
                     if (!mapsUsedInChart.ContainsKey(skillCharts[skill]))
                         mapsUsedInChart[skillCharts[skill]] = new List<Beatmap>() { beatmap };
                     else
@@ -94,8 +96,8 @@ namespace MapsetVerifierBackend.Rendering
             return skillCharts;
         }
 
-        private static Series GetSkillSeries(Beatmap beatmap, Skill skill, LineChart chart) =>
-            GetPeakSeries(beatmap, skill.StrainPeaks, peak => (float)peak, chart);
+        private static Series GetSkillSeries(Beatmap beatmap, StrainSkill strainSkill, LineChart chart) =>
+            GetPeakSeries(beatmap, strainSkill.GetCurrentStrainPeaks().ToList(), peak => (float)peak, chart);
 
         private static Series GetStarRatingSeries(Beatmap beatmap, LineChart chart)
         {
@@ -105,12 +107,17 @@ namespace MapsetVerifierBackend.Rendering
             Dictionary<int, List<float>> accumulatedPeaks = new Dictionary<int, List<float>>();
             foreach (Skill skill in beatmap.difficultyAttributes.Skills)
             {
-                for (int index = 0; index < skill.StrainPeaks.Count; ++index)
+                if (!(skill is StrainSkill strainSkill))
+                    continue;
+
+                List<double> strainPeaks = strainSkill.GetCurrentStrainPeaks().ToList();
+                
+                for (int index = 0; index < strainPeaks.Count; ++index)
                 {
                     if (accumulatedPeaks.ContainsKey(index))
-                        accumulatedPeaks[index].Add((float)skill.StrainPeaks[index]);
+                        accumulatedPeaks[index].Add((float)strainPeaks[index]);
                     else
-                        accumulatedPeaks[index] = new List<float>() { (float)skill.StrainPeaks[index] };
+                        accumulatedPeaks[index] = new List<float>() { (float)strainPeaks[index] };
                 }
             }
 
@@ -127,6 +134,9 @@ namespace MapsetVerifierBackend.Rendering
 
         private static Series GetPeakSeries<T>(Beatmap beatmap, IEnumerable<T> data, Func<T, float> Value, LineChart chart)
         {
+            if (data == null)
+                return null;
+            
             Series series = new Series(
                 label: beatmap.metadataSettings.version,
                 color: GetGraphColor(beatmap, chart)
@@ -136,7 +146,7 @@ namespace MapsetVerifierBackend.Rendering
                 float time = i * MS_PER_PEAK;
                 float value = Value(data.ElementAt(i));
                 series.Points.Add(new Vector2(
-                    x: time / 1000f,                         // Show time in seconds, rather than milliseconds.
+                    x: time / 1000f,  // Show time in seconds, rather than milliseconds.
                     y: value
                 ));
             }

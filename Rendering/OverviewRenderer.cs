@@ -277,10 +277,10 @@ namespace MapsetVerifierBackend.Rendering
         {
             return
                 RenderContainer("Statistics",
-                    RenderBeatmapContent(aBeatmapSet, "Old Star Rating", aBeatmap =>
+                    RenderBeatmapContent(aBeatmapSet, "Approx Star Rating", aBeatmap =>
                     {
-                        // Current star rating calc only supports standard.
-                        if (aBeatmap.generalSettings.mode == Beatmap.Mode.Standard)
+                        // Current star rating calc only supports standard and taiko.
+                        if (aBeatmap.generalSettings.mode == Beatmap.Mode.Standard || aBeatmap.generalSettings.mode == Beatmap.Mode.Taiko)
                             return $"{aBeatmap.starRating:0.##}";
                         else
                             return "N/A";
