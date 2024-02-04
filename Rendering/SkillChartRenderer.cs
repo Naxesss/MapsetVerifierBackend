@@ -110,6 +110,9 @@ namespace MapsetVerifierBackend.Rendering
                 if (!(skill is StrainSkill strainSkill))
                     continue;
 
+                if (!strainSkill.useInStarRating)
+                    continue;
+
                 List<double> strainPeaks = strainSkill.GetCurrentStrainPeaks().ToList();
                 
                 for (int index = 0; index < strainPeaks.Count; ++index)
@@ -124,10 +127,7 @@ namespace MapsetVerifierBackend.Rendering
             return GetPeakSeries(
                 beatmap: beatmap,
                 data:    accumulatedPeaks,
-                Value:   peak =>
-                    // TODO: Is this the same for t/c/m?
-                    peak.Value.Sum() +
-                    Math.Abs(peak.Value[0] - peak.Value[1]) * 2,
+                Value:   getSkillValueToStarRatingFunc(beatmap.generalSettings.mode),
                 chart:   chart
             );
         }
@@ -208,6 +208,16 @@ namespace MapsetVerifierBackend.Rendering
             }
 
             return Color.FromArgb((int)red, (int)green, (int)blue);
+        }
+
+        private static Func<KeyValuePair<int, List<float>>, float> getSkillValueToStarRatingFunc(Beatmap.Mode mode)
+        {
+            return mode switch
+            {
+                Beatmap.Mode.Standard => peak => peak.Value.Sum() + Math.Abs(peak.Value[0] - peak.Value[1]) / 2,
+                Beatmap.Mode.Taiko => peak => (float)(10.43 * Math.Log((peak.Value[0] * 1.4) / 8 + 1)),
+                _ => peak => peak.Value.Sum()   // TODO: Implement transformation functions for Mania and Catch
+            };
         }
     }
 }
