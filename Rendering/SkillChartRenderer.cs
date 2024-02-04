@@ -110,6 +110,9 @@ namespace MapsetVerifierBackend.Rendering
                 if (!(skill is StrainSkill strainSkill))
                     continue;
 
+                if (!strainSkill.useInStarRating)
+                    continue;
+
                 List<double> strainPeaks = strainSkill.GetCurrentStrainPeaks().ToList();
                 
                 for (int index = 0; index < strainPeaks.Count; ++index)
